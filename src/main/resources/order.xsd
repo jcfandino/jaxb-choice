@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://order.example.com"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://order.example.com"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+
+	<xs:element name="Order">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded">
+					<xs:choice minOccurs="0" maxOccurs="3">
+						<xs:element name="Credit" type="CreditType" form="qualified"/>
+						<xs:element name="GiftCard" type="GiftCardType" form="qualified"/>
+					</xs:choice>
+					<xs:any namespace="##other" processContents="lax"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="CreditType">
+		<xs:sequence>
+			<xs:element name="Number" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GiftCardType">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
